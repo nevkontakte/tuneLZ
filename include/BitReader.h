@@ -18,7 +18,7 @@ private:
 
 public:
 	BitReader(std::istream &stream);
-	~BitReader();
+	virtual ~BitReader();
 
 	bit getBit();
 	bool eof() const;
@@ -26,6 +26,8 @@ public:
 private:
 	bool isBufferEmpty() const;
 	void fillBuffer();
+
+	BitReader(const BitReader &stream);
 };
 
 #endif /* end of include guard: BITREADER_H__ */

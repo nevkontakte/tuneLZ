@@ -8,7 +8,7 @@ project(${PROJECT_NAME} CXX)
 #---------------------- Building main binary ----------------------
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
-file(GLOB SRC_FILES ${PROJECT_SOURCE_DIR}/src/*.cpp)
+file(GLOB SRC_FILES ${PROJECT_SOURCE_DIR}/src/*.cc)
 source_group("Source Files" FILES ${SRC_FILES})
 
 # Uncomment later, when main binary will be available
@@ -16,13 +16,16 @@ source_group("Source Files" FILES ${SRC_FILES})
 
 #---------------------- Building unit tests ------------------------
 
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIR})
+
 set(TEST_BINARY ${PROJECT_NAME}_test)
 
-# file(GLOB TEST_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
-# source_group("Test Files" FILES ${SRC_FILES})
+file(GLOB TEST_FILES ${PROJECT_SOURCE_DIR}/test/*.cc)
+source_group("Test Files" FILES ${SRC_FILES})
 
-# add_executable(${TEST_BINARY} ${TEST_FILES} ${SRC_FILES})
-# target_link_libraries(${TEST_BINARY} library)
+add_executable(${TEST_BINARY} ${TEST_FILES} ${SRC_FILES})
+target_link_libraries(${TEST_BINARY} gtest gtest_main pthread)
 
 #---------------------- Set up CTest -------------------------------
 

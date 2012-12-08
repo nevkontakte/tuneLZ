@@ -17,7 +17,7 @@ source_group("Source Files" FILES ${SRC_FILES})
 #---------------------- Building unit tests ------------------------
 
 find_package(GTest REQUIRED)
-include_directories(${GTEST_INCLUDE_DIR})
+include_directories(${GTEST_INCLUDE_DIRS})
 
 set(TEST_BINARY ${PROJECT_NAME}_test)
 
@@ -25,9 +25,11 @@ file(GLOB TEST_FILES ${PROJECT_SOURCE_DIR}/test/*.cc)
 source_group("Test Files" FILES ${SRC_FILES})
 
 add_executable(${TEST_BINARY} ${TEST_FILES} ${SRC_FILES})
-target_link_libraries(${TEST_BINARY} gtest gtest_main pthread)
+target_link_libraries(${TEST_BINARY}  ${GTEST_BOTH_LIBRARIES})
+target_link_libraries(${TEST_BINARY}  pthread)
 
 #---------------------- Set up CTest -------------------------------
 
 enable_testing()
 add_test(TestBinary ${TEST_BINARY})
+GTEST_ADD_TESTS(${TEST_BINARY} "" ${TEST_FILES})

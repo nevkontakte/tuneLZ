@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 #include <sstream>
-#include <iostream>
 
 #include "Symbol.h"
 

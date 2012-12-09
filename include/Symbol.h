@@ -2,6 +2,7 @@
 #define SYMBOL_H__
 
 #include "BitReader.h"
+#include "BitWriter.h"
 #include <ostream>
 
 class Symbol
@@ -17,6 +18,7 @@ public:
 	virtual ~Symbol();
 
 	void read(BitReader& stream);
+	void write(BitWriter& stream);
 	bool operator==(const Symbol& other) const;
 
 	friend std::ostream &operator<< (std::ostream &out, const Symbol &symbol);

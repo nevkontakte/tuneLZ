@@ -18,13 +18,16 @@ void Encoder::encode(std::istream& source, std::ostream& dest) {
 	unsigned char indexBits = 0;
 
 	while(!bitsIn.eof()) {
+		while((1 << indexBits) < dict.getSize()) indexBits++;
+
 		try {
 			currentSymbol.read(bitsIn);
 		} catch(std::ios_base::failure e) {
+			if (currentIndex != Dictionary::EMPTY_WORD_INDEX) {
+				this->dict.getWord(currentIndex).write(bitsOut, indexBits);
+			}
 			break;
 		}
-
-		while((1 << indexBits) < dict.getSize()) indexBits++;
 
 		CodeWord currentWord(currentSymbol, currentIndex);
 

@@ -12,7 +12,7 @@ file(GLOB SRC_FILES ${PROJECT_SOURCE_DIR}/src/*.cc)
 source_group("Source Files" FILES ${SRC_FILES})
 
 # Uncomment later, when main binary will be available
-# add_executable(${PROJECT_NAME} ${SRC_FILES}) 
+add_executable(${PROJECT_NAME} ${SRC_FILES} tuneLZ.cc) 
 
 #---------------------- Building unit tests ------------------------
 

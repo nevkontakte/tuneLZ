@@ -45,6 +45,10 @@ bool CodeWord::operator==(const CodeWord& other) const {
 	return this->index == other.index && this->symbol == other.symbol;
 }
 
+bool CodeWord::operator!=(const CodeWord& other) const {
+	return !(*this == other);
+}
+
 const Symbol& CodeWord::getSymbol() const {
 	return this->symbol;
 }

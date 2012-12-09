@@ -10,7 +10,7 @@ Dictionary::~Dictionary() {
 
 }
 
-CodeWord Dictionary::getWord(Index index) {
+CodeWord Dictionary::getWord(Index index) const {
 	if(index == Dictionary::NOT_FOUND) {
 		throw std::logic_error("Zero index denotes not found code word, it's not allowed here.");
 	}
@@ -43,7 +43,7 @@ void Dictionary::addWord(const CodeWord& word) {
 	this->entries.push_back(word);
 }
 
-Dictionary::Index Dictionary::getSize() {
+Dictionary::Index Dictionary::getSize() const {
 	return this->entries.size()+2;
 }
 

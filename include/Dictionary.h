@@ -19,11 +19,11 @@ public:
 	Dictionary();
 	virtual ~Dictionary();
 
-	CodeWord getWord(Index index);
+	CodeWord getWord(Index index) const;
 	Index getIndex(const CodeWord& word);
 	void addWord(const CodeWord& word);
 
-	Index getSize();
+	Index getSize() const;
 private:
 	Dictionary(const Dictionary& other);
 };

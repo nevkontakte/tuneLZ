@@ -26,6 +26,7 @@ public:
 	void write(BitWriter& stream, unsigned char indexBits) const;
 
 	bool operator==(const CodeWord& other) const;
+	bool operator!=(const CodeWord& other) const;
 	const Symbol& getSymbol() const;
 	Index getIndex() const;
 

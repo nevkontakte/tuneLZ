@@ -4,7 +4,7 @@
 
 TEST(Dictionary, Create) {
 	Dictionary d;
-	ASSERT_EQ(1, d.getSize());
+	ASSERT_EQ(2, d.getSize());
 }
 
 TEST(Dictionary, AddAndGet) {

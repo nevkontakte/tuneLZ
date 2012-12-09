@@ -44,7 +44,7 @@ void Dictionary::addWord(const CodeWord& word) {
 }
 
 Dictionary::Index Dictionary::getSize() {
-	return this->entries.size()+1;
+	return this->entries.size()+2;
 }
 
 const Dictionary::Index Dictionary::NOT_FOUND = CodeWord::EMPTY.getIndex();

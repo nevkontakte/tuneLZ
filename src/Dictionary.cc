@@ -11,16 +11,19 @@ Dictionary::~Dictionary() {
 }
 
 CodeWord Dictionary::getWord(Index index) {
-	if(index == 0) {
+	if(index == Dictionary::NOT_FOUND) {
+		throw std::logic_error("Zero index denotes not found code word, it's not allowed here.");
+	}
+	else if(index == Dictionary::EMPTY_WORD_INDEX) {
 		return CodeWord::EMPTY;
 	} else {
-		return this->entries[index-1];
+		return this->entries[index-2];
 	}
 }
 
 Dictionary::Index Dictionary::getIndex(const CodeWord& word) {
 	if(word == CodeWord::EMPTY) {
-		return 0;
+		return EMPTY_WORD_INDEX;
 	}
 
 	std::vector<CodeWord>::iterator found = std::find(this->entries.begin(), this->entries.end(), word);
@@ -28,7 +31,7 @@ Dictionary::Index Dictionary::getIndex(const CodeWord& word) {
 	if(found == this->entries.end()) {
 		return NOT_FOUND;
 	} else {
-		return found - this->entries.begin() + 1;
+		return found - this->entries.begin() + 2;
 	}
 }
 
@@ -41,7 +44,8 @@ void Dictionary::addWord(const CodeWord& word) {
 }
 
 Dictionary::Index Dictionary::getSize() {
-	return this->entries.size();
+	return this->entries.size()+1;
 }
 
-const Dictionary::Index Dictionary::NOT_FOUND = -1;
+const Dictionary::Index Dictionary::NOT_FOUND = CodeWord::EMPTY.getIndex();
+const Dictionary::Index Dictionary::EMPTY_WORD_INDEX = 1;

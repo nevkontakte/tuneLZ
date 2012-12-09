@@ -22,4 +22,10 @@ bool Symbol::operator==(const Symbol& other) const {
 	return this->value == other.value;
 }
 
+std::ostream &operator<< (std::ostream &out, const Symbol &symbol) {
+	out << symbol.value;
+	return out;
+}
+
 const Symbol::size_type Symbol::bits = sizeof(char)*8;
+

@@ -10,6 +10,7 @@ public:
 	typedef CodeWord::Index Index;
 
 	static const CodeWord::Index NOT_FOUND;
+	static const CodeWord::Index EMPTY_WORD_INDEX;
 
 private:
 	std::vector<CodeWord> entries;

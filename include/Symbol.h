@@ -2,6 +2,7 @@
 #define SYMBOL_H__
 
 #include "BitReader.h"
+#include <ostream>
 
 class Symbol
 {
@@ -17,6 +18,8 @@ public:
 
 	void read(BitReader& stream);
 	bool operator==(const Symbol& other) const;
+
+	friend std::ostream &operator<< (std::ostream &out, const Symbol &symbol);
 };
 
 #endif /* end of include guard: SYMBOL_H__ */

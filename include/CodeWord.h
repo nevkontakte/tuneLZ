@@ -8,7 +8,7 @@
 class CodeWord
 {
 public:
-	typedef std::vector<CodeWord>::difference_type Index;
+	typedef std::vector<CodeWord>::size_type Index;
 	static const CodeWord EMPTY;
 
 private:
@@ -27,5 +27,7 @@ public:
 private:
 	CodeWord(Index index);
 };
+
+std::ostream &operator<< (std::ostream &out, const CodeWord &word);
 
 #endif /* end of include guard: CODEWORD_H__ */

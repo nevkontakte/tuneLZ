@@ -19,6 +19,19 @@ CodeWord::~CodeWord() {
 
 }
 
+void CodeWord::write(BitWriter& stream, unsigned char indexBits) {
+	if((1 << (indexBits-1)) <= this->index) {
+		throw std::logic_error("Can't encode code word index passed with required bits.");
+	}
+
+	for (unsigned char i = 0; i < indexBits; ++i) {
+		BitWriter::bit bit = (this->index & (1 << (indexBits - i - 1))) != 0;
+		stream.putBit(bit);
+	}
+
+	this->symbol.write(stream);
+}
+
 bool CodeWord::operator==(const CodeWord& other) const {
 	return this->index == other.index && this->symbol == other.symbol;
 }

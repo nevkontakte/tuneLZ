@@ -2,6 +2,8 @@
 #define CODEWORD_H__
 
 #include "Symbol.h"
+#include "BitWriter.h"
+#include "BitReader.h"
 #include <vector>
 
 
@@ -19,6 +21,9 @@ public:
 	CodeWord();
 	CodeWord(const Symbol& symbol, Index index);
 	virtual ~CodeWord();
+
+	void read(BitReader& stream, unsigned char indexBits);
+	void write(BitWriter& stream, unsigned char indexBits);
 
 	bool operator==(const CodeWord& other) const;
 	const Symbol& getSymbol() const;

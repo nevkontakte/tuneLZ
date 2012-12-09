@@ -23,7 +23,7 @@ public:
 	virtual ~CodeWord();
 
 	void read(BitReader& stream, unsigned char indexBits);
-	void write(BitWriter& stream, unsigned char indexBits);
+	void write(BitWriter& stream, unsigned char indexBits) const;
 
 	bool operator==(const CodeWord& other) const;
 	const Symbol& getSymbol() const;

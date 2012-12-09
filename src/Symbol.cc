@@ -18,7 +18,7 @@ void Symbol::read(BitReader& stream) {
 	}
 }
 
-void Symbol::write(BitWriter& stream) {
+void Symbol::write(BitWriter& stream) const {
 	for(size_type i = 0; i < bits; ++i) {
 		BitWriter::bit bit = (this->value & (1 << (bits - i - 1))) != 0;
 		stream.putBit(bit);

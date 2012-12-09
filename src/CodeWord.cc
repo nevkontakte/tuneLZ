@@ -19,8 +19,17 @@ CodeWord::~CodeWord() {
 
 }
 
-void CodeWord::write(BitWriter& stream, unsigned char indexBits) {
-	if((1 << (indexBits-1)) <= this->index) {
+void CodeWord::read(BitReader& stream, unsigned char indexBits) {
+	this->index = 0;
+	for(unsigned char i = 0; i < indexBits; i++) {
+		BitReader::bit bit = stream.getBit();
+		this->index = (this->index << 1) | bit;
+	}
+	this->symbol.read(stream);
+}
+
+void CodeWord::write(BitWriter& stream, unsigned char indexBits) const {
+	if((1 << indexBits)-1 < this->index) {
 		throw std::logic_error("Can't encode code word index passed with required bits.");
 	}
 

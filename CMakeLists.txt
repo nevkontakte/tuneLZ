@@ -14,11 +14,11 @@ source_group("Source Files" FILES ${SRC_FILES})
 
 # Uncomment later, when main binary will be available
 add_executable(${PROJECT_NAME}_unlim ${SRC_FILES} runnable/tuneLZ_unlim.cc) 
-add_executable(${PROJECT_NAME}_lim64 ${SRC_FILES} runnable/tuneLZ_lim64.cc) 
-add_executable(${PROJECT_NAME}_lim128 ${SRC_FILES} runnable/tuneLZ_lim128.cc) 
-add_executable(${PROJECT_NAME}_lim256 ${SRC_FILES} runnable/tuneLZ_lim256.cc) 
-add_executable(${PROJECT_NAME}_lim512 ${SRC_FILES} runnable/tuneLZ_lim512.cc) 
-add_executable(${PROJECT_NAME}_lim1024 ${SRC_FILES} runnable/tuneLZ_lim1024.cc) 
+add_executable(${PROJECT_NAME}_size64 ${SRC_FILES} runnable/tuneLZ_size64.cc) 
+add_executable(${PROJECT_NAME}_size128 ${SRC_FILES} runnable/tuneLZ_size128.cc) 
+add_executable(${PROJECT_NAME}_size256 ${SRC_FILES} runnable/tuneLZ_size256.cc) 
+add_executable(${PROJECT_NAME}_size512 ${SRC_FILES} runnable/tuneLZ_size512.cc) 
+add_executable(${PROJECT_NAME}_size1024 ${SRC_FILES} runnable/tuneLZ_size1024.cc) 
 
 #---------------------- Building unit tests ------------------------
 

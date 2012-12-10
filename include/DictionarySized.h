@@ -1,5 +1,5 @@
-#ifndef DICTIONARY_LIMITED_H__
-#define DICTIONARY_LIMITED_H__
+#ifndef DICTIONARY_SIZED_H__
+#define DICTIONARY_SIZED_H__
 
 #include <vector>
 #include "Bits.h"
@@ -117,4 +117,4 @@ const typename CodeWord<bits>::Index DictionarySized<bits>::NOT_FOUND = CodeWord
 template<Bits::bit_count bits>
 const typename DictionarySized<bits>::Index DictionarySized<bits>::EMPTY_WORD_INDEX = 1;
 
-#endif /* end of include guard: DICTIONARY_LIMITED_H__ */
+#endif /* end of include guard: DICTIONARY_SIZED_H__ */

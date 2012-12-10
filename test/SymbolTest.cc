@@ -5,11 +5,13 @@
 
 using namespace std;
 
+const Bits::bit_count bits = 8;
+
 TEST(Symbol, Read) {
-	Symbol actual;
+	Symbol<bits> actual;
 	char c = 0;
 	for(unsigned int i = 0; i < 256; ++i) {
-		Symbol expected(c);
+		Symbol<bits> expected(c);
 
 		istringstream in(string(1, c));
 		BitReader stream(in);
@@ -27,7 +29,7 @@ TEST(Symbol, Write) {
 
 		ostringstream out;
 		BitWriter stream(out);
-		Symbol symbol(c);
+		Symbol<bits> symbol(c);
 		symbol.write(stream);
 
 		ASSERT_EQ(expected, out.str());

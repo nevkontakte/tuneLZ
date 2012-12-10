@@ -3,25 +3,41 @@
 
 #include "BitReader.h"
 #include "BitWriter.h"
+#include "Bits.h"
 #include <ostream>
 
-class Symbol
+template<Bits::bit_count bits> class Symbol
 {
 public:
 	typedef unsigned char size_type;
 protected:
 	char value;
-	static const size_type bits;
 public:
-	Symbol();
-	Symbol(char value);
-	virtual ~Symbol();
+	Symbol():value(0) {};
+	Symbol(char value):value(value) {};
+	virtual ~Symbol() {};
 
-	void read(BitReader& stream);
-	void write(BitWriter& stream) const;
-	bool operator==(const Symbol& other) const;
+	void read(BitReader& stream) {
+		this->value = 0;
+		for(size_type i = 0; i < bits; ++i) {
+			BitReader::bit bit = stream.getBit();
+			value = (value << 1) | bit;
+		}
+	};
+	void write(BitWriter& stream) const {
+		for(size_type i = 0; i < bits; ++i) {
+			BitWriter::bit bit = (this->value & (1 << (bits - i - 1))) != 0;
+			stream.putBit(bit);
+		}
+	};
+	bool operator==(const Symbol& other) const {
+		return this->value == other.value;
+	};
 
-	friend std::ostream &operator<< (std::ostream &out, const Symbol &symbol);
+	friend std::ostream &operator<< (std::ostream &out, const Symbol &symbol) {
+		out << symbol.value;
+		return out;
+	}
 };
 
 #endif /* end of include guard: SYMBOL_H__ */

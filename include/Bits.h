@@ -8,6 +8,7 @@ class Bits
 public:
 	typedef char bit;
 	/* data */
+	typedef unsigned char bit_count;
 };
 
 #endif /* end of include guard: BITS_H__ */

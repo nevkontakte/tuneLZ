@@ -5,8 +5,10 @@
 #include <sstream>
 #include <string>
 
+const Bits::bit_count bits = 8;
+
 TEST(Encoder, Create) {
-	Encoder coder;
+	Encoder<bits> coder;
 }
 
 TEST(Encoder, CompressSimple) {
@@ -30,7 +32,7 @@ TEST(Encoder, CompressSimple) {
 	std::istringstream input(uncompressed, std::istringstream::binary | std::istringstream::in);
 	std::ostringstream output;
 
-	Encoder coder;
+	Encoder<bits> coder;
 	coder.encode(input, output);
 
 	std::istringstream compressed(output.str());
@@ -62,7 +64,7 @@ TEST(Encoder, CompressTail) {
 	std::istringstream input(uncompressed, std::istringstream::binary | std::istringstream::in);
 	std::ostringstream output;
 
-	Encoder coder;
+	Encoder<bits> coder;
 	coder.encode(input, output);
 
 	std::istringstream compressed(output.str());

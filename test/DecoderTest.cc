@@ -2,6 +2,8 @@
 #include <gtest/gtest.h>
 #include "Decoder.h"
 
+const Bits::bit_count bits = 8;
+
 TEST(Decoder, Simple) {
 	std::string uncompressed;
 	uncompressed = uncompressed + "a" + "ab" + "abc" + "abcd" + "abcde" + "abcdef" + "abcdefg" + "abcdefgh";
@@ -31,7 +33,7 @@ TEST(Decoder, Simple) {
 	std::istringstream input(compressed.str());
 	std::ostringstream output;
 
-	Decoder coder;
+	Decoder<bits> coder;
 	coder.decode(input, output);
 
 	ASSERT_EQ(uncompressed, output.str());

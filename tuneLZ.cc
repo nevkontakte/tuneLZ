@@ -4,6 +4,8 @@
 #include "Encoder.h"
 #include "Decoder.h"
 
+const Bits::bit_count bits = 8;
+
 int main(int argc, char* argv[]) {
 	bool encode = true;
 
@@ -21,10 +23,10 @@ int main(int argc, char* argv[]) {
 	}
 
 	if(encode) {
-		Encoder coder;
+		Encoder<bits> coder;
 		coder.encode(std::cin, std::cout);
 	} else {
-		Decoder coder;
+		Decoder<bits> coder;
 		coder.decode(std::cin, std::cout);
 	}
 

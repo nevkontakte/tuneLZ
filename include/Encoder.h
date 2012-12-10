@@ -4,11 +4,11 @@
 #include "Dictionary.h"
 #include "Bits.h"
 
-template<Bits::bit_count bits> class Encoder
+template<Bits::bit_count bits, template<Bits::bit_count> class D> class Encoder
 {
-	Dictionary<bits> dict;
+	D<bits>& dict;
 public:
-	Encoder() {};
+	Encoder(D<bits>& dict):dict(dict) {};
 	~Encoder() {};
 
 	void encode(std::istream& source, std::ostream& dest) {
@@ -16,7 +16,7 @@ public:
 		BitWriter bitsOut(dest);
 
 		Symbol<bits> currentSymbol;
-		typename CodeWord<bits>::Index currentIndex = Dictionary<bits>::EMPTY_WORD_INDEX;
+		typename CodeWord<bits>::Index currentIndex = D<bits>::EMPTY_WORD_INDEX;
 
 		unsigned char indexBits = 0;
 
@@ -26,7 +26,7 @@ public:
 			try {
 				currentSymbol.read(bitsIn);
 			} catch(std::ios_base::failure e) {
-				if (currentIndex != Dictionary<bits>::EMPTY_WORD_INDEX) {
+				if (currentIndex != D<bits>::EMPTY_WORD_INDEX) {
 					this->dict.getWord(currentIndex).write(bitsOut, indexBits);
 				}
 				break;
@@ -36,10 +36,10 @@ public:
 
 			currentIndex = this->dict.getIndex(currentWord);
 
-			if(currentIndex == Dictionary<bits>::NOT_FOUND) {
+			if(currentIndex == D<bits>::NOT_FOUND) {
 				this->dict.addWord(currentWord);
 				currentWord.write(bitsOut, indexBits);
-				currentIndex = Dictionary<bits>::EMPTY_WORD_INDEX;
+				currentIndex = D<bits>::EMPTY_WORD_INDEX;
 			}
 		}
 

@@ -9,7 +9,8 @@ const Bits::bit_count bits8 = 8;
 const Bits::bit_count bits4 = 4;
 
 TEST(Encoder, Create) {
-	Encoder<bits8> coder;
+	Dictionary<bits8> d;
+	Encoder<bits8,Dictionary> coder(d);
 }
 
 TEST(Encoder, CompressSimple8) {
@@ -33,7 +34,8 @@ TEST(Encoder, CompressSimple8) {
 	std::istringstream input(uncompressed, std::istringstream::binary | std::istringstream::in);
 	std::ostringstream output;
 
-	Encoder<bits8> coder;
+	Dictionary<bits8> d;
+	Encoder<bits8,Dictionary> coder(d);
 	coder.encode(input, output);
 
 	std::istringstream compressed(output.str());
@@ -65,7 +67,8 @@ TEST(Encoder, CompressTail8) {
 	std::istringstream input(uncompressed, std::istringstream::binary | std::istringstream::in);
 	std::ostringstream output;
 
-	Encoder<bits8> coder;
+	Dictionary<bits8> d;
+	Encoder<bits8,Dictionary> coder(d);
 	coder.encode(input, output);
 
 	std::istringstream compressed(output.str());
@@ -99,7 +102,8 @@ TEST(Encoder, SimpleTest4) {
 	std::istringstream input(uncompressed, std::istringstream::binary | std::istringstream::in);
 	std::ostringstream output;
 
-	Encoder<bits4> coder;
+	Dictionary<bits4> d;
+	Encoder<bits4,Dictionary> coder(d);
 	coder.encode(input, output);
 
 	std::istringstream compressed(output.str());

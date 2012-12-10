@@ -31,6 +31,7 @@ public:
 			return this->entries[index-2];
 		}
 	};
+
 	Index getIndex(const CodeWord<bits>& word) {
 		if(word == CodeWord<bits>::EMPTY) {
 			return EMPTY_WORD_INDEX;
@@ -61,6 +62,14 @@ public:
 	Index getSize() const {
 		return this->entries.size()+2;
 	};
+
+	void expandWord(CodeWord<bits> word, BitWriter& bitsOut) {
+		if(word != CodeWord<bits>::EMPTY) {
+			this->expandWord(this->getWord(word.getIndex()), bitsOut);
+			word.getSymbol().write(bitsOut);
+		}
+	};
+
 private:
 	Dictionary(const Dictionary& other);
 };

@@ -4,11 +4,11 @@
 #include <iostream>
 #include "Dictionary.h"
 
-template<Bits::bit_count bits> class Decoder
+template<Bits::bit_count bits, template<Bits::bit_count> class D> class Decoder
 {
-	Dictionary<bits> dict;
+	D<bits>& dict;
 public:
-	Decoder() {};
+	Decoder(D<bits>& dict):dict(dict) {};
 	virtual ~Decoder() {};
 
 	void decode(std::istream& source, std::ostream& dest) {
@@ -22,7 +22,7 @@ public:
 
 			CodeWord<bits> word;
 			word.read(bitsIn, indexBits);
-			this->expandWord(word, bitsOut);
+			this->dict.expandWord(word, bitsOut);
 
 			if(word == CodeWord<bits>::EMPTY) {
 				break;
@@ -31,14 +31,6 @@ public:
 			dict.addWord(word);
 		}
 		dest.flush();
-	};
-
-protected:
-	void expandWord(CodeWord<bits> word, BitWriter& bitsOut) {
-		if(word != CodeWord<bits>::EMPTY) {
-			this->expandWord(this->dict.getWord(word.getIndex()), bitsOut);
-			word.getSymbol().write(bitsOut);
-		}
 	};
 };
 

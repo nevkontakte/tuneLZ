@@ -4,6 +4,9 @@
 #include "Encoder.h"
 #include "Decoder.h"
 
+#define ENCODE(bits, Dict) case bits: {Dict<bits> d; Encoder<bits, Dict> coder(d); coder.encode(std::cin, std::cout); }; break;
+#define DECODE(bits, Dict) case bits: {Dict<bits> d; Decoder<bits, Dict> coder(d); coder.decode(std::cin, std::cout); }; break;
+
 int main(int argc, char* argv[]) {
 	bool encode = true;
 	Bits::bit_count bits = 8;
@@ -25,59 +28,19 @@ int main(int argc, char* argv[]) {
 
 	if(encode) {
 		switch(bits) {
-			case 1:
-				{
-					Encoder<1> coder;
-					coder.encode(std::cin, std::cout);
-				}
-				break;
-			case 2:
-				{
-					Encoder<2> coder;
-					coder.encode(std::cin, std::cout);
-				}
-				break;
-			case 4:
-				{
-					Encoder<4> coder;
-					coder.encode(std::cin, std::cout);
-				}
-				break;
-			case 8:
-			default:
-				{
-					Encoder<8> coder;
-					coder.encode(std::cin, std::cout);
-				}
-				break;
+			ENCODE(1, Dictionary);
+			ENCODE(2, Dictionary);
+			ENCODE(4, Dictionary);
+		default:
+			ENCODE(8, Dictionary);
 		}
 	} else {
 		switch(bits) {
-			case 1:
-				{
-					Decoder<1> coder;
-					coder.decode(std::cin, std::cout);
-				}
-				break;
-			case 2:
-				{
-					Decoder<2> coder;
-					coder.decode(std::cin, std::cout);
-				}
-				break;
-			case 4:
-				{
-					Decoder<4> coder;
-					coder.decode(std::cin, std::cout);
-				}
-				break;
-			case 8:
-			default:
-				{
-					Decoder<8> coder;
-					coder.decode(std::cin, std::cout);
-				}
-				break;
+			DECODE(1, Dictionary);
+			DECODE(2, Dictionary);
+			DECODE(4, Dictionary);
+		default:
+			DECODE(8, Dictionary);
 		}
 	}
 

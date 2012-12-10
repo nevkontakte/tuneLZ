@@ -34,7 +34,8 @@ TEST(Decoder, Simple8) {
 	std::istringstream input(compressed.str());
 	std::ostringstream output;
 
-	Decoder<bits8> coder;
+	Dictionary<bits8> d;
+	Decoder<bits8,Dictionary> coder(d);
 	coder.decode(input, output);
 
 	ASSERT_EQ(uncompressed, output.str());
@@ -71,7 +72,8 @@ TEST(Decoder, Simple4) {
 	std::istringstream input(compressed.str());
 	std::ostringstream output;
 
-	Decoder<bits4> coder;
+	Dictionary<bits4> d;
+	Decoder<bits4,Dictionary> coder(d);
 	coder.decode(input, output);
 
 	ASSERT_EQ(uncompressed, output.str());

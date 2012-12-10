@@ -1,14 +1,14 @@
 #include "tuneLZ.h"
-#include "DictionaryLimited.h"
+#include "DictionarySized.h"
 
 template<Bits::bit_count bits> 
-class DictionaryLimited512 : public DictionaryLimited<bits>
+class DictionarySized512 : public DictionarySized<bits>
 {
 public:
-	DictionaryLimited512():DictionaryLimited<bits>(512) {};
-	virtual ~DictionaryLimited512() {};
+	DictionarySized512():DictionarySized<bits>(512) {};
+	virtual ~DictionarySized512() {};
 };
 
 int main(int argc, char* argv[]) {
-	return mainTemplate<DictionaryLimited512>(argc, argv);
+	return mainTemplate<DictionarySized512>(argc, argv);
 }

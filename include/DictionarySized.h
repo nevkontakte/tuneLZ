@@ -5,7 +5,7 @@
 #include "Bits.h"
 #include "CodeWord.h"
 
-template<Bits::bit_count bits> class DictionaryLimited
+template<Bits::bit_count bits> class DictionarySized
 {
 	struct Entry;
 
@@ -21,14 +21,14 @@ private:
 	Index limit;
 
 public:
-	DictionaryLimited(Index limit):limit(limit) {};
-	virtual ~DictionaryLimited() {};
+	DictionarySized(Index limit):limit(limit) {};
+	virtual ~DictionarySized() {};
 
 	CodeWord<bits> getWord(Index index) const {
-		if(index == DictionaryLimited<bits>::NOT_FOUND) {
+		if(index == DictionarySized<bits>::NOT_FOUND) {
 			throw std::logic_error("Zero index denotes not found code word, it's not allowed here.");
 		}
-		else if(index == DictionaryLimited::EMPTY_WORD_INDEX || index >= this->getSize()) {
+		else if(index == DictionarySized::EMPTY_WORD_INDEX || index >= this->getSize()) {
 			return CodeWord<bits>::EMPTY;
 		} else {
 			return this->getEntry(index).word;
@@ -80,7 +80,7 @@ public:
 	};
 
 private:
-	DictionaryLimited(const DictionaryLimited& other);
+	DictionarySized(const DictionarySized& other);
 
 	const Entry& getEntry(Index index) const {
 		return this->entries.at(index-2);
@@ -93,7 +93,7 @@ private:
 		CodeWord<bits> word;
 		std::vector<Symbol<bits> > symbols;
 
-		Entry(const CodeWord<bits>& word, DictionaryLimited& d):word(word) {
+		Entry(const CodeWord<bits>& word, DictionarySized& d):word(word) {
 			if(word.getIndex() > EMPTY_WORD_INDEX) {
 				const std::vector<Symbol<bits> >& syms = d.getEntry(word.getIndex()).symbols;
 				this->symbols.assign(syms.begin(), syms.end());
@@ -111,10 +111,10 @@ private:
 };
 
 template<Bits::bit_count bits>
-const typename CodeWord<bits>::Index DictionaryLimited<bits>::NOT_FOUND = CodeWord<bits>::EMPTY.getIndex();
+const typename CodeWord<bits>::Index DictionarySized<bits>::NOT_FOUND = CodeWord<bits>::EMPTY.getIndex();
 
 
 template<Bits::bit_count bits>
-const typename DictionaryLimited<bits>::Index DictionaryLimited<bits>::EMPTY_WORD_INDEX = 1;
+const typename DictionarySized<bits>::Index DictionarySized<bits>::EMPTY_WORD_INDEX = 1;
 
 #endif /* end of include guard: DICTIONARY_LIMITED_H__ */

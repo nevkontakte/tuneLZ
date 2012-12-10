@@ -3,7 +3,7 @@
 #include "Encoder.h"
 #include "Decoder.h"
 #include "Dictionary.h"
-#include "DictionaryLimited.h"
+#include "DictionarySized.h"
 
 const std::string sheogorath = std::string() +
 	"Wonderful! Time for a celebration... Cheese for everyone! Wait, scratch that. Cheese for no one. That can be just as much of a celebration, if you don't like cheese, true? You've run a maze like a good little rat. But no cheese for you yet. Well, maybe a little.\n" +
@@ -47,8 +47,8 @@ TEST(Sheogorath, Dictionary) {
 	coder.run(d1,d2);
 }
 
-TEST(Sheogorath, DictionaryLimited) {
-	DictionaryLimited<8> d1(24),d2(24);
-	SheogorathCoder<8, DictionaryLimited> coder;
+TEST(Sheogorath, DictionarySized) {
+	DictionarySized<8> d1(24),d2(24);
+	SheogorathCoder<8, DictionarySized> coder;
 	coder.run(d1,d2);
 }

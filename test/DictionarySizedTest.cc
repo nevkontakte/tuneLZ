@@ -1,18 +1,18 @@
 #include <gtest/gtest.h>
 #include <sstream>
-#include "DictionaryLimited.h"
+#include "DictionarySized.h"
 
 const Bits::bit_count bits8 = 8;
 
-TEST(DictionaryLimited, Create) {
-	const DictionaryLimited<bits8>::Index limit = 4;
-	DictionaryLimited<bits8> d(limit);
+TEST(DictionarySized, Create) {
+	const DictionarySized<bits8>::Index limit = 4;
+	DictionarySized<bits8> d(limit);
 	ASSERT_EQ(2, d.getSize());
 }
 
-TEST(DictionaryLimited, Fill) {
-	const DictionaryLimited<bits8>::Index limit = 6;
-	DictionaryLimited<bits8> d(limit);
+TEST(DictionarySized, Fill) {
+	const DictionarySized<bits8>::Index limit = 6;
+	DictionarySized<bits8> d(limit);
 	
 	for(char i = 2; i <= limit; i++) {
 		CodeWord<bits8> word(Symbol<bits8>('a'+i), i-1);
@@ -27,9 +27,9 @@ TEST(DictionaryLimited, Fill) {
 	ASSERT_EQ(CodeWord<bits8>::EMPTY, d.getWord(limit));
 }
 
-TEST(DictionaryLimited, Expand) {
-	const DictionaryLimited<bits8>::Index limit = 6;
-	DictionaryLimited<bits8> d(limit);
+TEST(DictionarySized, Expand) {
+	const DictionarySized<bits8>::Index limit = 6;
+	DictionarySized<bits8> d(limit);
 	
 	for(char i = 2; i <= limit; i++) {
 		CodeWord<bits8> word(Symbol<bits8>('a'+i), i-1);

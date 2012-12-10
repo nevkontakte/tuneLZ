@@ -5,8 +5,6 @@
 #include "Bits.h"
 #include "CodeWord.h"
 
-#include <iostream>
-
 template<Bits::bit_count bits> class Dictionary
 {
 public:
@@ -54,7 +52,6 @@ public:
 
 	void addWord(const CodeWord<bits>& word) {
 		if(word.getIndex() > this->getSize()) {
-			std::cout << word << std::endl;
 			throw std::logic_error("Code word to be added refers word out of dictionary");
 		}
 

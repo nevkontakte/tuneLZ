@@ -4,6 +4,7 @@
 #include "BitReader.h"
 #include "BitWriter.h"
 #include "Bits.h"
+#include "helper.h"
 #include <ostream>
 
 template<Bits::bit_count bits> class Symbol
@@ -35,7 +36,7 @@ public:
 	};
 
 	friend std::ostream &operator<< (std::ostream &out, const Symbol &symbol) {
-		out << symbol.value;
+		out << symbol.value << ' ' << binary(symbol.value);
 		return out;
 	}
 };

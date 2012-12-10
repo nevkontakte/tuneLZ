@@ -1,7 +1,6 @@
 #ifndef ENCODER_H__
 #define ENCODER_H__
 
-#include <iostream>
 #include "Dictionary.h"
 #include "Bits.h"
 

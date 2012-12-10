@@ -1,3 +1,6 @@
+#ifndef HELPER_H__
+#define HELPER_H__
+
 template<typename T> char* binary(T n) {
 	const int bits = sizeof(T)*8;
 	static char str[bits+1];
@@ -9,3 +12,5 @@ template<typename T> char* binary(T n) {
 
 	return str;
 }
+
+#endif /* end of include guard: HELPER_H__ */

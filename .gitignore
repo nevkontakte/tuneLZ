@@ -9,3 +9,4 @@ CTestTestfile.cmake
 tuneLZ_test
 tuneLZ
 Testing/
+bin/

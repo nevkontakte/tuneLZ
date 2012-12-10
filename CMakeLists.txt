@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
 
 set(PROJECT_NAME tuneLZ)
 project(${PROJECT_NAME} CXX)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "bin/")
 
 #---------------------- Building main binary ----------------------
 
@@ -12,7 +13,7 @@ file(GLOB SRC_FILES ${PROJECT_SOURCE_DIR}/src/*.cc)
 source_group("Source Files" FILES ${SRC_FILES})
 
 # Uncomment later, when main binary will be available
-add_executable(${PROJECT_NAME} ${SRC_FILES} tuneLZ.cc) 
+add_executable(${PROJECT_NAME}_unlim ${SRC_FILES} runnable/tuneLZ_unlim.cc) 
 
 #---------------------- Building unit tests ------------------------
 

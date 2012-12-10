@@ -23,6 +23,7 @@ template<template<Bits::bit_count> class D> int mainTemplate(int argc, char* arg
 			encode = false;
 		} else if(arg1 == "-1" || arg1 == "-2" || arg1 == "-4" || arg1 == "-8") {
 			bits = arg1[1] - '0';
+		} else if ((arg1.size() > 2) && (arg1[0] == '-') && (arg1[1] == '-')) {
 		} else {
 			std::cerr << "USAGE: " << argv[0] << " [-e|-d] [-1|-2|-4|-8]" << std::endl;
 			std::cerr << "\t-e\t\t--- compression, default." << std::endl;

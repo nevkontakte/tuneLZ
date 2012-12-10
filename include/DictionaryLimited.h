@@ -79,7 +79,12 @@ private:
 	DictionaryLimited(const DictionaryLimited& other);
 
 	unsigned int getWordLength(CodeWord<bits> word) const {
-		return 0;
+		unsigned int length = 0;
+		while(word != CodeWord<bits>::EMPTY) {
+			++length;
+			word = this->getWord(word.getIndex());
+		}
+		return length;
 	}
 };
 

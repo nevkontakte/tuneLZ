@@ -39,6 +39,16 @@ public:
 		out << symbol.value << ' ' << binary(symbol.value);
 		return out;
 	}
+
+	friend struct std::hash<Symbol<bits> >;
 };
 
+
+namespace std {
+	template<Bits::bit_count bits> struct hash<Symbol<bits> > {
+		size_t operator()(const Symbol<bits>& symbol) const {
+			return hash<char>()(symbol.value);
+		}
+	};
+}
 #endif /* end of include guard: SYMBOL_H__ */

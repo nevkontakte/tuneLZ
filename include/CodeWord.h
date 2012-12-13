@@ -76,6 +76,15 @@ std::ostream &operator<< (std::ostream &out, const CodeWord<bits> &word) {
 	return out;
 };
 
+namespace std {
+	template<Bits::bit_count bits> struct hash<CodeWord<bits> > {
+		size_t operator()(const CodeWord<bits>& word) const {
+			return hash<typename CodeWord<bits>::Index >()(word.getIndex()) ^ hash<Symbol<bits> >()(word.getSymbol());
+		}
+	};
+}
+
 template<Bits::bit_count bits> 
 const CodeWord<bits> CodeWord<bits>::EMPTY(0);
+
 #endif /* end of include guard: CODEWORD_H__ */

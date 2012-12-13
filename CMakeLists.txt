@@ -51,5 +51,5 @@ target_link_libraries(${TEST_BINARY}  pthread)
 #---------------------- Set up CTest -------------------------------
 
 enable_testing()
-add_test(TestBinary ${TEST_BINARY})
-GTEST_ADD_TESTS(${TEST_BINARY} "" ${TEST_FILES})
+add_test(TestBinary ./bin/${TEST_BINARY})
+GTEST_ADD_TESTS(./bin/${TEST_BINARY} "" ${TEST_FILES})

@@ -2,6 +2,7 @@
 #define DICTIONARY_LIMITED_H__
 
 #include <vector>
+#include <unordered_map>
 #include "Bits.h"
 #include "CodeWord.h"
 
@@ -15,7 +16,9 @@ public:
 
 private:
 	typedef typename std::vector<CodeWord<bits> > Entries;
+	typedef typename std::unordered_map< CodeWord<bits>, Index, std::hash<CodeWord<bits> > > EntriesHashMap;
 	Entries entries;
+	EntriesHashMap reserve_map;
 	const unsigned int maxLength;
 
 public:
@@ -38,17 +41,10 @@ public:
 			return EMPTY_WORD_INDEX;
 		}
 
-		typename Entries::iterator found;
-		for(found = this->entries.begin(); found != this->entries.end(); found++) {
-			if(*found == word) {
-				break;
-			}
-		}
-
-		if(found == this->entries.end()) {
-			return NOT_FOUND;
+		if(this->reserve_map.count(word) > 0) {
+			return this->reserve_map.at(word)+2;
 		} else {
-			return found - this->entries.begin() + 2;
+			return NOT_FOUND;
 		}
 	};
 
@@ -61,6 +57,7 @@ public:
 			return;
 		}
 
+		this->reserve_map.insert({{word, this->entries.size()}});
 		this->entries.push_back(word);
 	};
 
